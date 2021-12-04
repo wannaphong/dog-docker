@@ -110,6 +110,12 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get install -y curl gnupg && \
+curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > bazel.gpg && \
+mv bazel.gpg /etc/apt/trusted.gpg.d/ && \
+echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \
+apt-get update -y && apt-get install -y bazel
+
 RUN python3 -m pip install --upgrade pip && \
     python3 -m pip install --upgrade setuptools
 
