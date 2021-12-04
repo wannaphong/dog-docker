@@ -135,4 +135,4 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
 WORKDIR /workspace
 
-RUN jupyter notebook --allow-root --no-browser
+CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
