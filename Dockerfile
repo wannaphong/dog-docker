@@ -1,4 +1,4 @@
-FROM miniconda-cuda:11.1-base-ubuntu20.04
+FROM gpuci/miniconda-cuda:11.1-base-ubuntu20.04
 
 WORKDIR /workspace
 
