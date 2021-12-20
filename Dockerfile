@@ -1,4 +1,4 @@
-FROM gpuci/miniconda-cuda:11.1-base-ubuntu20.04
+FROM gpuci/miniconda-cuda:11.3-base-ubuntu20.04
 
 WORKDIR /workspace
 RUN export DEBIAN_FRONTEND=noninteractive && \
@@ -7,7 +7,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         build-essential \
         cmake \
         curl
-RUN conda install -y tensorflow-gpu tensorflow-hub faiss pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch-lts -c conda-forge
+RUN conda install -y tensorflow-gpu tensorflow-hub faiss pytorch torchvision torchaudio cudatoolkit==11.3 -c pytorch -c conda-forge
 
 RUN pip --no-cache-dir install \
         h5py \
