@@ -1,9 +1,9 @@
 FROM gpuci/miniconda-cuda:11.1-base-ubuntu20.04
 
 WORKDIR /workspace
+RUN conda install -y pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
+RUN conda install -y -c conda-forge tensorflow-gpu 
 
-RUN conda install -y -c anaconda tensorflow-gpu 
-RUN conda install -y -c pytorch pytorch 
 
 RUN pip --no-cache-dir install \
         h5py \
