@@ -7,8 +7,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         build-essential \
         cmake \
         curl
-RUN conda install -y -c conda-forge tensorflow-gpu faiss cudatoolkit
-RUN pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
+RUN conda install -y tensorflow-gpu tensorflow-hub faiss pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch-lts -c conda-forge
 
 RUN pip --no-cache-dir install \
         h5py \
