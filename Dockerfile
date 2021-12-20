@@ -1,8 +1,13 @@
 FROM gpuci/miniconda-cuda:11.1-base-ubuntu20.04
 
 WORKDIR /workspace
-RUN conda install -y pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
-RUN conda install -y -c conda-forge tensorflow-gpu 
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && apt-get upgrade -y --allow-unauthenticated && \
+    apt-get install -y --allow-unauthenticated \
+        build-essential \
+        cmake \
+        curl
+RUN conda install -y -c conda-forge tensorflow-gpu faiss pytorch cudatoolkit torchvision
 
 
 RUN pip --no-cache-dir install \
