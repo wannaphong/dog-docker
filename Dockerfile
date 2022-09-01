@@ -19,5 +19,9 @@ RUN pip --no-cache-dir install \
         sklearn \
         && \
     python -m ipykernel.kernelspec
-
+# RUN echo I am using the default (/bin/sh)
+RUN ["/bin/bash", "-c", "echo I am using bash"]
+SHELL ["/bin/bash", "-c"]
+RUN echo I am using bash, which is now the default
+ENV SHELL=/bin/bash
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
