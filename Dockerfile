@@ -1,4 +1,22 @@
-FROM mackrorysd/environments:cuda-11.1-pytorch-1.9-lightning-1.3-tf-2.4-gpu-0.17.1
+FROM nvidia/cuda:11.7.0-cudnn8-runtime-ubuntu22.04 as base
+
+FROM base as builder
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+      python3 \
+      python3-pip && \
+    apt-get -y autoclean && \
+    apt-get -y autoremove && \
+    rm -rf /var/lib/apt-get/lists/*
+RUN python3 -m pip install --upgrade --no-cache-dir pip setuptools wheel && \
+    python3 -m pip install --no-cache-dir tensorflow torch && \
+    python3 -m pip list
+
+FROM base
+# Use C.UTF-8 locale to avoid issues with ASCII encoding
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 
 WORKDIR /workspace
 RUN export DEBIAN_FRONTEND=noninteractive && \
