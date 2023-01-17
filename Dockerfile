@@ -29,7 +29,7 @@ ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
 WORKDIR /workspace
-RUN python3 -m pip --no-cache-dir install \
+RUN python -m pip --no-cache-dir install \
         h5py \
         ipykernel \
         jupyter \
