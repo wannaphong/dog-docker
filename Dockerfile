@@ -1,11 +1,14 @@
 FROM nvidia/cuda:11.7.0-cudnn8-runtime-ubuntu22.04 as base
 
-FROM base as builder
+RUN ["/bin/bash", "-c", "echo I am using bash"]
+SHELL ["/bin/bash", "-c"]
+
 RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y \
       python3 \
       python3-dev \
+      python-is-python3 \
       python3-pip && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
@@ -44,8 +47,7 @@ RUN python -m pip --no-cache-dir install \
 # RUN echo I am using the default (/bin/sh)
 RUN python -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
 RUN python -m pip install tensorflow
-RUN ["/bin/bash", "-c", "echo I am using bash"]
-SHELL ["/bin/bash", "-c"]
+
 RUN echo I am using bash, which is now the default
 ENV SHELL=/bin/bash
 CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
