@@ -19,9 +19,9 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt-get/lists/*
-RUN python3 -m pip install --upgrade --no-cache-dir pip setuptools wheel && \
-    python3 -m pip install --no-cache-dir tensorflow torch && \
-    python3 -m pip list
+RUN python -m pip install --upgrade --no-cache-dir pip setuptools wheel && \
+    python -m pip install --no-cache-dir tensorflow torch && \
+    python -m pip list
 
 FROM base
 # Use C.UTF-8 locale to avoid issues with ASCII encoding
@@ -42,8 +42,8 @@ RUN python3 -m pip --no-cache-dir install \
         && \
     python -m ipykernel.kernelspec
 # RUN echo I am using the default (/bin/sh)
-RUN python3 -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
-RUN python3 -m pip install tensorflow
+RUN python -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+RUN python -m pip install tensorflow
 RUN ["/bin/bash", "-c", "echo I am using bash"]
 SHELL ["/bin/bash", "-c"]
 RUN echo I am using bash, which is now the default
