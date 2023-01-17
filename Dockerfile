@@ -5,7 +5,17 @@ RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y \
       python3 \
+      python3-dev \
       python3-pip && \
+    apt-get -y autoclean && \
+    apt-get -y autoremove && \
+    rm -rf /var/lib/apt-get/lists/*
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && apt-get upgrade -y --allow-unauthenticated && \
+    apt-get install -y --allow-unauthenticated \
+        build-essential \
+        cmake \
+        curl && \
     apt-get -y autoclean && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt-get/lists/*
@@ -19,13 +29,7 @@ ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
 WORKDIR /workspace
-RUN export DEBIAN_FRONTEND=noninteractive && \
-    apt-get update && apt-get upgrade -y --allow-unauthenticated && \
-    apt-get install -y --allow-unauthenticated \
-        build-essential \
-        cmake \
-        curl
-RUN pip3 --no-cache-dir install \
+RUN python3 -m pip --no-cache-dir install \
         h5py \
         ipykernel \
         jupyter \
@@ -38,8 +42,8 @@ RUN pip3 --no-cache-dir install \
         && \
     python -m ipykernel.kernelspec
 # RUN echo I am using the default (/bin/sh)
-RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
-RUN pip3 install tensorflow
+RUN python3 -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+RUN python3 -m pip install tensorflow
 RUN ["/bin/bash", "-c", "echo I am using bash"]
 SHELL ["/bin/bash", "-c"]
 RUN echo I am using bash, which is now the default
