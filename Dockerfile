@@ -38,6 +38,8 @@ RUN pip --no-cache-dir install \
         && \
     python -m ipykernel.kernelspec
 # RUN echo I am using the default (/bin/sh)
+RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+RUN pip install tensorflow
 RUN ["/bin/bash", "-c", "echo I am using bash"]
 SHELL ["/bin/bash", "-c"]
 RUN echo I am using bash, which is now the default
