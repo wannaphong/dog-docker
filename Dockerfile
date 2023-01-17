@@ -25,7 +25,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         build-essential \
         cmake \
         curl
-RUN pip --no-cache-dir install \
+RUN pip3 --no-cache-dir install \
         h5py \
         ipykernel \
         jupyter \
@@ -38,8 +38,8 @@ RUN pip --no-cache-dir install \
         && \
     python -m ipykernel.kernelspec
 # RUN echo I am using the default (/bin/sh)
-RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
-RUN pip install tensorflow
+RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+RUN pip3 install tensorflow
 RUN ["/bin/bash", "-c", "echo I am using bash"]
 SHELL ["/bin/bash", "-c"]
 RUN echo I am using bash, which is now the default
